@@ -1,0 +1,10 @@
+.favourite-indicator {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid red;
+}
+
+.is-favourite {
+  background-color: red;
+}
