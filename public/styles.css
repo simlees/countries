@@ -8,3 +8,11 @@
 .is-favourite {
   background-color: red;
 }
+
+.country-name {
+  cursor: pointer;
+}
+
+.selected {
+  font-weight: bold;
+}

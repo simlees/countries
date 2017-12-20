@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
-  toggleFavouriteCountry
+  toggleFavouriteCountry,
+  selectCountry
 } from '../actions'
 import CountryList from '../components/CountryList'
 
@@ -11,10 +12,16 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.handleToggleFavourite = this.handleToggleFavourite.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
   }
 
   handleToggleFavourite(country) {
     this.props.dispatch(toggleFavouriteCountry(country))
+  }
+
+  handleSelect(country) {
+    this.props.dispatch(selectCountry(country))
+    this.props.dispatch(fetchCountryIfRequired(country))
   }
 
   render() {
@@ -22,7 +29,8 @@ class App extends Component {
     return (
       <div className="App">
         <CountryList countries={countries}
-                     onToggle={this.handleToggleFavourite}/>
+                     onToggle={this.handleToggleFavourite}
+                     onSelect={this.handleSelect}/>
       </div>
     );
   }
