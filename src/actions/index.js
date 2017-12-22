@@ -30,7 +30,7 @@ function receiveCountry(country, json) {
   return {
     type: RECEIVE_COUNTRY,
     country,
-    info: json.data,
+    data: json,
     receivedAt: Date.now()
   }
 }
@@ -44,7 +44,7 @@ function shouldFetchCountry(countries, country) {
  * It's a Thunk action! Returns a Fn instead of an action, Thunk middleware calls
  * this action and passes in the dispatch and getState methods.
  */
-export function fetchCountryIfNeeded(country) {
+export function fetchCountryIfRequired(country) {
   return (dispatch, getState) => {
     if (shouldFetchCountry(getState(), country)) {
       return dispatch(fetchCountry(country))
@@ -53,11 +53,11 @@ export function fetchCountryIfNeeded(country) {
 }
 
 
-// function fetchCountry(country) {
-//   return dispatch => {
-//     dispatch(requestCountry(country))
-//     return fetch(`https://www.reddit.com/r/${subreddit}.json`)
-//       .then(response => response.json())
-//       .then(json => dispatch(receivePosts(subreddit, json)))
-//   }
-// }
+function fetchCountry(country) {
+  return dispatch => {
+    dispatch(requestCountry(country))
+    return fetch(`https://restcountries.eu/rest/v2/name/${country.name}?fullText=true`)
+      .then(response => response.json())
+      .then(json => dispatch(receiveCountry(country, json)))
+  }
+}

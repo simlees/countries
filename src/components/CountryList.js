@@ -6,13 +6,15 @@ export default class CountryList extends Component {
   render() {
     const { countries, onToggle, onSelect } = this.props;
     return (
-      <ul>
-        {countries.map((country, i) => <CountryListItem onToggle={onToggle}
-                                                        onSelect={onSelect}
-                                                        country={country}
-                                                        key={i} />
-        )}
-      </ul>
+      <div>
+        <ul>
+          {countries.map((country, i) => <CountryListItem onToggle={onToggle}
+                                                          onSelect={onSelect}
+                                                          country={country}
+                                                          key={i} />
+          )}
+        </ul>
+      </div>
     )
   }
 }

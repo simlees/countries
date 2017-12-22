@@ -3,9 +3,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
   toggleFavouriteCountry,
-  selectCountry
+  selectCountry,
+  fetchCountryIfRequired
 } from '../actions'
 import CountryList from '../components/CountryList'
+import CountryInfoContainer from '../containers/CountryInfoContainer'
 
 class App extends Component {
 
@@ -31,6 +33,7 @@ class App extends Component {
         <CountryList countries={countries}
                      onToggle={this.handleToggleFavourite}
                      onSelect={this.handleSelect}/>
+        <CountryInfoContainer />
       </div>
     );
   }
